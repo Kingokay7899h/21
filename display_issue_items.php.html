@@ -1,0 +1,26 @@
+<?php
+session_start();
+$conn = new mysqli("localhost", "root", "", "asset_management");
+if ($conn->connect_error) die("Connection failed");
+
+if (!isset($_SESSION['lab_id'])) {
+  echo json_encode([]);
+  exit();
+}
+
+$lab_id = $_SESSION['lab_id'];
+$sql = "SELECT name_of_the_item, lab_id FROM register WHERE lab_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $lab_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$rows = [];
+while ($row = $result->fetch_assoc()) {
+  $rows[] = $row;
+}
+
+echo json_encode($rows);
+$stmt->close();
+$conn->close();
+?>

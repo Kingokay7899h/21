@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Issues</title>
+  <link rel="stylesheet" href="student_issues.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <h2>DAMS</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="inventory.html">Inventory</a></li>
+      <li><a href="procurement.html">Procurement</a></li>
+      <li><a href="condemnation.html">Condemnation</a></li>
+      <li><a href="maintenance.html">Maintenance</a></li>
+      <li class="active"><a href="student_issues.html">Student Issues</a></li>
+      <li><a href="logout.php">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <h1>Student Issues - Select Item</h1>
+    <div class="table-container">
+      <table id="issueItemsTable">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Serial No</th>
+            <th>Item Name</th>
+            <th>Lab ID</th>
+          </tr>
+        </thead>
+        <tbody id="issueItemsBody"></tbody>
+      </table>
+    </div>
+    <button class="create-issue-btn floating" onclick="openCreateIssue()">Create Issue</button>
+
+    <h1 style="margin-top: 50px;">Current Issues</h1>
+    <div class="table-container">
+      <table id="issuesTable">
+        <thead>
+          <tr>
+            <th>Serial No</th>
+            <th>Item Name</th>
+            <th>Lab ID</th>
+            <th>Issue</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="issuesBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Create Issue Modal -->
+  <div id="createIssueModal" class="modal">
+    <div class="modal-content animated-modal">
+      <span class="close" onclick="closeModal('createIssueModal')">&times;</span>
+      <h2>Create New Issue</h2>
+      <form id="createIssueForm">
+        <label>Item Name:</label>
+        <input type="text" id="createItemName" readonly />
+
+        <label>Lab ID:</label>
+        <input type="text" id="createLabID" readonly />
+
+        <label>Issue Description:</label>
+        <textarea id="issueText" required></textarea>
+
+        <label>Status:</label>
+        <input type="text" value="Pending" readonly />
+
+        <button type="submit">Create Issue</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Update Status Modal -->
+  <div id="statusModal" class="modal">
+    <div class="modal-content animated-modal">
+      <span class="close" onclick="closeModal('statusModal')">&times;</span>
+      <h2>Update Issue Status</h2>
+      <form id="statusUpdateForm">
+        <label>Item Name:</label>
+        <input type="text" id="statusItemName" readonly />
+
+        <label>Lab ID:</label>
+        <input type="text" id="statusLabID" readonly />
+
+        <label>Issue:</label>
+        <textarea id="statusIssueText" readonly></textarea>
+
+        <label>Status:</label>
+        <select id="statusSelect">
+          <option value="Pending">Pending</option>
+          <option value="Resolved">Resolved</option>
+        </select>
+
+        <button type="submit">Update Status</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">✔️ Issue Created Successfully</div>
+
+  <script src="student_issues.js"></script>
+</body>
+</html>
